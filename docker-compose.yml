@@ -54,9 +54,11 @@ services:
     volumes:
       - ./services/website:/usr/src/app
       - /usr/src/app/node_modules
+    stdin_open: true    # for bug in react-scripts 3.4.1
     depends_on:
       - redis
       - postgres
     environment:
       PORT: "10060"
+      CHOKIDAR_USEPOLLING: 'true'
     command: ['yarn', 'start']
