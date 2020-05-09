@@ -1,0 +1,88 @@
+SpotifyAuthorizeEndpoint:
+  get:
+    tags:
+      - spotify
+    summary: Authorize
+    description: Redirects to Spotify for Authentication.
+    parameters:
+      - name: redirect_uri
+        in: query
+        required: true
+        description: The callback uri for redirect after authorization.
+        example: playola-oauth://spotify-redirect
+    responses:
+      '302':    # status code
+        description: Redirects the user to Spotify for Sign In/Sign Up.
+
+SpotifyAuthTokenSwapEndpoint:
+  post:
+    tags:
+      - spotify
+    summary: Token Swap
+    description: 
+      Swap a code for an access_token and refresh_token, or
+      swap an old refresh_token for a new access_token.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    example: 'thespotifyredirectcode'
+                  redirect_uri:
+                    type: string
+                    example: playola-oauth://spotify-redirect
+              - schema:
+                type: object
+                properties:
+                  refresh_token:
+                    type: string
+                    example: 'thisisaspotifyrefreshtoken'
+    responses:
+      '200':    # status code
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - schema:
+                  description: (If refresh_token was provided)
+                  type: object
+                  properties:
+                    access_token:
+                      type: string
+                      example: NgCXRKMzYjw
+                    token_type:
+                      type: string
+                      example: Bearer
+                    scope:
+                      type: string
+                      example: user-read-private user-read-email
+                    expires_in:
+                      type: integer
+                      example: 3600
+
+                - schema:
+                  description: (If code / redirect_uri was provided)
+                  type: object
+                  properties:
+                    access_token:
+                      type: string
+                      example: NgCXRKMzYjw
+                    token_type:
+                      type: string
+                      example: Bearer
+                    scope:
+                      type: string
+                      example: user-read-private user-read-email
+                    expires_in:
+                      type: integer
+                      example: 3600
+                    refresh_token:
+                      type: string
+                      example: NgAagAUmSHo
+
+

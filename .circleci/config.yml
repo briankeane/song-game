@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    working_directory: ~/src
+
+    steps:
+      - checkout
+      - run: docker-compose run server npx env-cmd -f .env-test sequelize-cli db:migrate
+      - run: docker-compose run server yarn test
+      - run: docker-compose run server yarn lint
+

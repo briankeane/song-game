@@ -1,0 +1,30 @@
+CreateUserEndpoint:
+  post:
+    tags:
+      - users
+    summary: Create a User
+    description: 
+      Create a user -- pass in the refreshToken you receive from Spotify
+      to create a user.  You will receive a jwt token that you can use
+      in the Bearer header.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              spotifyRefreshToken:
+                type: string
+                description: The refreshToken you received from Spotify
+                example: 'thisisaspotifyrefreshtoken' 
+    responses:
+      '200':    # status code
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: NgCXRKMzYjw
+                  description: This is a Bearer token for use in future request headers.
