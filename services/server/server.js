@@ -30,7 +30,7 @@ app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-if (process.env.environment === 'test') {
+if (process.env.environment === 'test' || process.env.environment === 'dev') {
   app.use(morgan('dev'));
 }
 

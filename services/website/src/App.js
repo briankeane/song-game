@@ -1,20 +1,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Container } from 'semantic-ui-react';
 
-import store from './redux';
+import { createStore } from 'redux';
+import reducers from './lib/redux/reducers';
+import Welcome from './pages/Welcome';
 
-import Header from './components/Header';
-import Search from './components/Search';
-import SelectedUser from './components/SelectedUser';
-
+const store = createStore(reducers);
+	
 const App = () => (
   <div>
-  	<Header />
-  	<Container style={{ paddingTop: '7em' }}>
-  		<Search />
-  		<SelectedUser />
-  	</Container>
+  	<Welcome />
   </div>
 );
 

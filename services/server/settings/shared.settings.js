@@ -31,6 +31,5 @@ module.exports = {
     'user-read-birthdate',
     'user-read-email'
   ].join(' '),
-
   ...requiredENV
 };
