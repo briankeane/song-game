@@ -5,6 +5,7 @@ module.exports = function (app) {
   app.use('/v1/healthCheck', require('./api/healthCheck'));
   app.use('/v1/spotify', require('./api/spotify'));
   app.use('/v1/users', require('./api/user'));
+  app.use('/v1/auth', require('./api/auth'));
 
   // serve the main swagger file
   app.get('/swagger.yaml', (req, res) => {
